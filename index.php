@@ -2,7 +2,7 @@
 	
 	require('ting.class.php');
 	
-	$id = htmlspecialchars('870970-basis:26917921');
+	$id = htmlspecialchars(isset($_REQUEST['id']) ? $_REQUEST['id'] : '870970-basis:26917921');
 	
 	if (isset($_REQUEST['callback'])) {
 		
