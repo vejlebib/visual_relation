@@ -1,0 +1,2 @@
+rewriteEngine on
+rewriteRule ^get-ting-object/(.*)$ index.php?id=$1&%{QUERY_STRING} [NC,L]
