@@ -38,12 +38,12 @@
 			</head>
 			<body>
 				<button data-relvis-id="' . $id . '" class="relvis-request button" data-relvis-type="external">Test</button>
-				<script src=http://ssl.solsort.com/visualisering-af-relationer/scripts/97cc9982.vendor.js></script>
-				<script src=http://ssl.solsort.com/visualisering-af-relationer/scripts/62d2003d.main.js></script>
+				<script src="http://ssl.solsort.com/visualisering-af-relationer/scripts/9619e7eb.main.js"></script>
+				<script src="http://ssl.solsort.com/visualisering-af-relationer/scripts/ce898ec3.vendor.js"></script>
 				<script>
 					$(function(){
 						relvis.init({
-							apiUrl: "http' . ($_SERVER['SERVER_PORT'] == '443' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '",
+							apiUrl: "http' . ($_SERVER['SERVER_PORT'] == '443' ? 's' : '') . '://' . trim($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], '/') . '",
 						});
 					});
 				</script>
