@@ -39,47 +39,45 @@ class ting {
 	}
 	
 	/**
-	* Returns a opensearch-record as a simplexml element
+	* Returns opensearch-object as an array
 	*/
-	private static function get_record($id) {
+	public static function get_object($id) {
+		
+		$result = array();
 		
 		if (!$xml = self::request('
 			<getObjectRequest>
 				<agency>' . self::$AGENCY . '</agency>
 				<profile>' . self::$PROFILE . '</profile>
 				<identifier>' . $id . '</identifier>
+				<relationData>full</relationData>
 			</getObjectRequest>
 		')) return false;
 		
-		
-		$xml->registerXPathNamespace('dkabm', 'http://biblstandard.dk/abm/namespace/dkabm/');
-		if (false === $record = current($xml->xpath('searchResponse/result/searchResult/collection/object/dkabm:record'))) {
+		if (false === $object = current($xml->xpath('searchResponse/result/searchResult/collection/object'))) {
 			return false;
 		}
 		
-		return $record;
-	}
-	
-	/**
-	* Returns a opensearch-record as an array
-	*/
-	public static function get_record_as_array($id) {
-		
-		if (false === $record = self::get_record($id)) {
-			return false;
+		$relations = array();
+		if (isset($object->relations->relation)) {
+			foreach ($object->relations->relation as $relation) {
+				$relations[] = [strval($relation->relationUri), strval($relation->relationType)];
+			}
 		}
 		
-		$recordArray = array();
+		$record = $object->children('dkabm', true)->record;
 		$namespaces = $record->getNamespaces(true);
 		foreach ($namespaces as $prefix => $namespace) {
 			$children = $record->children($namespace);
 			foreach ($children as $child) {
 				$type = $child->attributes('xsi', true)->type;
-				$recordArray[$prefix . ':' . $child->getName() . ($type ? '+' . $type : '')][] = strval($child);
+				$result[$prefix . ':' . $child->getName() . ($type ? '+' . $type : '')][] = strval($child);
 			}
 		}
 		
-		return $recordArray;
+		$result['relations'] = $relations;
+		
+		return $result;
 	}
 	
 }

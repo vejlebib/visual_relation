@@ -8,7 +8,7 @@
 		
 		$callback = htmlspecialchars($_REQUEST['callback']);
 		
-		$record = ting::get_record_as_array($id);
+		$object = ting::get_object($id);
 		
 		$property_set = [
 			'title' => 'dc:title',
@@ -20,9 +20,9 @@
 		
 		foreach ($property_set as $property_key => $record_key) {
 			
-			if (isset($record[$record_key])) {
+			if (isset($object[$record_key])) {
 				
-				foreach ($record[$record_key] as $value) {
+				foreach ($object[$record_key] as $value) {
 					$properties[] = '{"property":"' . $property_key . '","value":' . json_encode($value) . '}';
 				}
 			}
