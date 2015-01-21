@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style type="text/css">
+			* {
+				font: 18px/1.3em arial, sans-serif;
+			}
+			html, body {
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				background: url(images/bg.jpg) center center no-repeat #000;
+				background-size: cover;
+			}
+			input[type=text] {
+				border: 0;
+				border-radius: .2em;
+				padding: .5em;
+			}
+			button, input[type=submit] {
+				border: 0;
+				border-radius: .2em;
+				padding: .5em 1.5em;
+				text-align: center;
+				background: #6aa299;
+				color: #fff;
+			}
+			input::-moz-focus-inner, button::-moz-focus-inner {
+				border: 0;
+			}
+			input:focus, button:focus {
+				outline: 0;
+			}
+			#top {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 80px;
+				box-sizing: border-box;
+				width: 100%;
+				padding: 1em 2em;
+				background: #101a1c;
+				z-index: 9999999999;
+			}
+			#top button {
+				width: 5em;
+				margin-left: .7em;
+			}
+			#query {
+				width: 15em;
+				max-width: 50%;
+				background: url(images/query.png) right center no-repeat #fff;
+			}
+			#query:focus {
+				width: 30em;
+			}
+			#email {
+				width: 64%;
+			}
+			#cart-button {
+				display: none;
+				float: right;
+				padding-left: 40px;
+				background: url(images/cart.png) 10px 12px no-repeat #6aa299;
+			}
+			#cart {
+				display: none;
+				position: absolute;
+				right: 2em;
+				min-width: 20em;
+				margin-top: .7em;
+				border-radius: .2em;
+				padding: 1.2em;
+				background: #6aa299;
+				color: #fff;
+			}
+			#cart-list {
+				display: block;
+				margin-bottom: 1em;
+			}
+			#cart-list div {
+				margin-bottom: .5em;
+				border-radius: .2em;
+				padding: .5em;
+				background: #568880;
+			}
+			#cart button {
+				background: #2b4649;
+			}
+			#bottom {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				height: 80px;
+				box-sizing: border-box;
+				width: 100%;
+				text-align: center;
+				background: #101a1c;
+				z-index: 99999999999;
+			}
+			#bottom button {
+				margin: 1em .3em;
+			}
+			#bottom button.active {
+				background: #2b4649;
+			}
+			#details {
+				display: none;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				box-sizing: border-box;
+				width: 100%;
+				padding: 1.2em 2em;
+				background: #101a1c;
+				color: #fff;
+				z-index: 999999999991;
+			}
+			#cover {
+				float: left;
+				height: 220px;
+				margin-right: 2em;
+			}
+			#title {
+				margin-bottom: .5em;
+				font: 700 24px/1.3em arial, sans-serif;
+			}
+			#abstract {
+				width: 50em;
+				max-width: 66%;
+				margin-bottom: .5em;
+			}
+			#availability {
+				color: #6aa299;
+			}
+			#availability span {
+				color: #de4d87;
+			}
+			#details-close {
+				position: absolute;
+				top: 1.2em;
+				right: 2em;
+				overflow: hidden;
+				width: 2.5em;
+				height: 2.5em;
+				padding: 0;
+				text-indent: -999px;
+				background: url(images/close.png) center center no-repeat #2b4649;
+			}
+			#details-buttons {
+				position: absolute;
+				top: 5em;
+				right: 2em;
+			}
+			#details-buttons button {
+				display: block;
+				width: 12em;
+				margin: 0 0 .5em 0;
+			}
+			#msg {
+				display: none;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 14em;
+				text-align: center;
+				border: 3px solid #6aa299;
+				border-radius: .2em;
+				margin: -5em 0 0 -10em;
+				padding: 3em;
+				background: #101a1c;
+				color: #fff;
+				z-index: 99999999999;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="top">
+			<form>
+				<input id="query" type="text" />
+				<button>Søg</button>
+				<button id="cart-button" type="button">0</button>
+			</form>
+			<div id="cart">
+				<span id="cart-list"></span>
+				<input id="email" type="text" placeholder="Din email-adresse" />
+				<button id="email-button" type="button">Send</button>
+			</div>
+		</div>
+		<div id="bottom">
+			<button id="slide1" data-relvis-type="circular" data-relvis-id="870970-basis:26917921" class="relvis-request button">Harry potter</button>
+			<button id="slide2" data-relvis-type="external" data-relvis-id="870970-basis:23243431" class="relvis-request button">Steppeulven</button>
+			<button id="slide3" data-relvis-type="struct" data-relvis-id="search:flunkerne" class="relvis-request button">Flunkerne</button>
+			<button id="slide4" data-relvis-type="struct" data-relvis-id="search:bornholm" class="relvis-request button">Bornholm</button>
+		</div>
+		<div id="details">
+			<img id="cover" src="#" />
+			<div id="title"></div>
+			<div id="abstract"></div>
+			<div id="availability"></div>
+			<button id="details-close" type="button">Luk</button>
+			<div id="details-buttons">
+				<button id="details-circular" type="button">Anbefalinger</button>
+				<button id="details-external" type="button">Gå på opdagelse</button>
+				<button id="details-cart" type="button">Huskeliste</button>
+			</div>
+		</div>
+		<div id="msg">Sender huskelisten</div>
+		<script src="scripts/main.js"></script>
+		<script src="scripts/vendor.js"></script>
+		<script src="scripts/app.js"></script>
+	</body>
+</html>
