@@ -54,7 +54,7 @@ $(function() {
 		var p = o.properties;
 		
 		$("#cover").attr("src", p.cover ? p.cover : p.defaultCover);
-		$("#title").html(o.title);
+		$("#title").html(o.title ? String(o.title) : String(p.title));
 		$("#abstract").html(p.abstract ? String(p.abstract) : "");
 		showAvailability(o.id);
 		
