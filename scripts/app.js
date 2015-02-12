@@ -84,7 +84,7 @@ $(function() {
 			$("#cart-button").html(cart.length).show();
 		});
 		
-		$("#details").show();
+		$("#details").slideDown();
 	}
 	
 	function initVR() {
