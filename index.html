@@ -101,10 +101,25 @@
 				z-index: 99999999999;
 			}
 			#bottom button {
-				margin: 1em .3em;
+				position: relative;
+				overflow: visible;
+				margin: 1.2em .3em;
 			}
 			#bottom button.active {
 				background: #2b4649;
+			}
+			#bottom button.active:after {
+				position: absolute;
+				bottom: 100%;
+				left: 50%;
+				height: 0;
+				width: 0;
+				margin-left: -12px;
+				border: solid transparent;
+				border-color: transparent;
+				border-bottom-color: #2b4649;
+				border-width: 12px;
+				content: " ";
 			}
 			#details {
 				display: none;

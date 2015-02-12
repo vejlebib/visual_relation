@@ -92,7 +92,6 @@ $(function() {
 		relvis.init({
 			apiUrl: "https://dev.vejlebib.dk/ting-visual-relation",
 			logUrl: "http://relvis.solsort.com/_relvis_log.js",
-			// relatedUrl: "http://relvis.solsort.com/relvis-api",
 			loadingCover: "images/wait.png",
 			disablePrefetch: false,
 			clickHandle: onObjectClick,
