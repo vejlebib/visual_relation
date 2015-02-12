@@ -54,7 +54,7 @@ $(function() {
 		var p = o.properties;
 		
 		$("#cover").attr("src", p.cover ? p.cover : p.defaultCover);
-		$("#title").html(o.title ? String(o.title) : String(p.title));
+		$("#title").html(String(o.title ? o.title : p.title));
 		$("#abstract").html(p.abstract ? String(p.abstract) : "");
 		showAvailability(o.id);
 		
@@ -78,7 +78,8 @@ $(function() {
 			for (var i = 0; i < cart.length; i++) {
 				if (cart[i]["id"] == o.id) return; // abort if already in cart
 			}
-			var title = o.title.length > 42 ? o.title.substring(0, 40) + "..." : o.title;
+			var title = String(o.title ? o.title : p.title);
+			title = title.length > 42 ? title.substring(0, 40) + "..." : title;
 			cart.push({"id": o.id, "title": title});
 			$("#cart span").append("<div>" + cart[i]["title"] + "</div>");
 			$("#cart-button").html(cart.length).show();
