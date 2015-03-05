@@ -163,6 +163,14 @@ $(function() {
 			$('#cart span a').each(function () {
 				if ($(this).attr("data-id") == id) $(this).parent().remove();
 			});
+			cartSize = $("#cart span a").length;
+			if (cartSize > 0) {
+				$("#cart-button").html(cartSize);
+			}
+			else {
+				resetCart();
+			}
+
 		});
 		
 		$("#cart-button").click(function() {
