@@ -22,6 +22,7 @@ $(function() {
 		collapseDialogs();
 		$("#cart-button").hide().html("0");
 		$("#cart span").html("");
+		$("#email").val("");
 		cart = [];
 	}
 
@@ -168,9 +169,13 @@ $(function() {
 
 		$("#email-button").click(function() {
 			
-			// faking emails for now
 			$("#msg").show();
 			setTimeout(function() { $("#msg").hide(); }, 3000);
+			var idsURL = "";
+			for (var i = 0; i < cart.length; i++) {
+				idsURL += "pids[]=" + encodeURIComponent(cart[i]["id"]) + "&";
+			}
+			$.get("https://dev.vejlebib.dk/ting-visual-relation/send-bookmark-mail/" + encodeURIComponent($("#email").val()) + "?" + idsURL);
 			resetCart();
 		});
 	}
