@@ -8,7 +8,7 @@ $(function() {
 	function showAvailability(id) {
 		
 		$("#availability").html("");
-		(window.$ || window.jQuery).ajax("http://dev.vejlebib.dk/ting-visual-relation/get-availability/" + id, {
+		(window.$ || window.jQuery).ajax("https://dev.vejlebib.dk/ting-visual-relation/get-availability/" + id, {
 			cache: true,
 			dataType: "jsonp",
 			success: function(data) {
