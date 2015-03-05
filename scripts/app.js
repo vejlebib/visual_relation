@@ -1,6 +1,5 @@
 $(function() {
 
-	var cart = [];
 	var slideNo = 0;
 	var slideTimeout = 300000;
 	var slideTimer = 0;
@@ -23,7 +22,6 @@ $(function() {
 		$("#cart-button").hide().html("0");
 		$("#cart span").html("");
 		$("#email").val("");
-		cart = [];
 	}
 
 	function collapseDialogs() {
@@ -69,14 +67,16 @@ $(function() {
 		});
 		
 		$("#details-cart").unbind("click").click(function(e) {
-			for (var i = 0; i < cart.length; i++) {
-				if (cart[i]["id"] == o.id) return; // abort if already in cart
-			}
+			
+			var alreadyInCart = false;
+			$('#cart span a').each(function () {
+				if ($(this).attr("data-id") == o.id) alreadyInCart = true;
+			});
+			if (alreadyInCart) return;
 			var title = String(o.title ? o.title : p.title);
 			title = title.length > 42 ? title.substring(0, 40) + "..." : title;
-			cart.push({"id": o.id, "title": title});
-			$("#cart span").append("<div>" + cart[i]["title"] + "</div>");
-			$("#cart-button").html(cart.length).show();
+			$("#cart span").append("<div><a href=\"#\" data-id=\"" + o.id + "\">X</a> " + title + "</div>");
+			$("#cart-button").html($("#cart span a").length).show();
 		});
 		
 		$("#details").slideDown();
@@ -155,6 +155,16 @@ $(function() {
 			return false;
 		});
 
+		// clickevent for dynamically generated anchors that delete cart items
+		$('#cart span').on('click', "a" , function(e) {
+			
+			e.preventDefault();
+			var id = $(this).attr("data-id");
+			$('#cart span a').each(function () {
+				if ($(this).attr("data-id") == id) $(this).parent().remove();
+			});
+		});
+		
 		$("#cart-button").click(function() {
 			
 			$("#cart").toggle();
@@ -165,9 +175,9 @@ $(function() {
 			$("#msg").show();
 			setTimeout(function() { $("#msg").hide(); }, 3000);
 			var idsURL = "";
-			for (var i = 0; i < cart.length; i++) {
-				idsURL += "pids[]=" + encodeURIComponent(cart[i]["id"]) + "&";
-			}
+			$('#cart span a').each(function () {
+				idsURL += "pids[]=" + encodeURIComponent($(this).attr("data-id")) + "&";
+			});
 			$.get("https://dev.vejlebib.dk/ting-visual-relation/send-bookmark-mail/" + encodeURIComponent($("#email").val()) + "?" + idsURL);
 			resetCart();
 		});
