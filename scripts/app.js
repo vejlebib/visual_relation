@@ -63,13 +63,6 @@ $(function() {
 		$("#details-circular").removeClass("relvis-enabled relvis-disabled").addClass("relvis-request").attr("data-relvis-id", o.id);
 		relvis.updateButtons();
 		
-		//if (p.related) {
-		//	$("#details-circular").show();
-		//}
-		//else {
-		//	$("#details-circular").hide();
-		//}
-		
 		$("#details-external").unbind("click").click(function(e) {
 			collapseDialogs();
 			relvis.open("external", o.id);
