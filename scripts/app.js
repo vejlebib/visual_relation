@@ -178,7 +178,7 @@ $(function() {
 			$('#cart span a').each(function () {
 				idsURL += "pids[]=" + encodeURIComponent($(this).attr("data-id")) + "&";
 			});
-			$.get("https://dev.vejlebib.dk/ting-visual-relation/send-bookmark-mail/" + encodeURIComponent($("#email").val()) + "?" + idsURL);
+			(window.$ || window.jQuery).ajax("https://dev.vejlebib.dk/ting-visual-relation/send-bookmark-mail/" + encodeURIComponent($("#email").val()) + "?" + idsURL, { dataType: "jsonp" });
 			resetCart();
 		});
 	}
